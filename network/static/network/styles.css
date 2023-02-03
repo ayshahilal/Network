@@ -1,0 +1,68 @@
+.background  {
+    background-color: rgb(80, 124, 181)!important;
+}
+.new_post { 
+    margin-top: 10px;
+    width:70%; /* how much space the content should take up */
+
+    /* These two lines center the div */
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+.user_profile .card {
+   
+    background-color: rgb(234, 233, 233);
+    margin-top: 10px;
+    width:70%; /* how much space the content should take up */
+
+    /* These two lines center the div */
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+}
+
+.center_{
+    margin-left:auto;
+    margin-right:auto;
+}
+.posts { 
+    width:70%; /* how much space the content should take up */
+    margin-top: 20px;
+    
+    /* These two lines center the div */
+    margin-left:auto;
+    margin-right:auto;
+
+}
+  
+.edit_button {
+    float: right;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid #73AD21;
+}
+.delete_button {
+    float: right;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid red;
+}
+
+.delete { 
+    margin-top: 10px;
+    width:70%; /* how much space the content should take up */
+
+    /* These two lines center the div */
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
+
+.count_likes {
+    padding-left: 17px;
+    
+}

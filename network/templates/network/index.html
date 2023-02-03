@@ -1,0 +1,59 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+    {% if user.is_authenticated and main_page %}
+        <div class="new_post">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">What's new today?</h5>
+                    <form action="{% url 'newpost' %}" method="POST">
+                        {% csrf_token %}
+                        <textarea name="comment" class="form-control" rows="3"></textarea>
+                        <button type="submit" class="btn btn-outline-success">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>    
+    {% endif %}
+    
+    <div class="posts">
+        {% for post in current_page %}
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title"><a href="{% url 'profile' user_id=post.owner.id %}">{{ post.owner }}</a></h6>
+                <p class="card-text">{{ post.comment }}</p>
+
+                {% if user.is_authenticated and post.owner != user %}
+                    {% if post.id in posts_liked %}
+                        <button type="button" class="btn btn-outline-light fa fa-heart" style="font-size:18px; color:red" id="unlike_{{ post.id }}" onclick="unlike_post('{{post.id}}')"></button>
+                        <button type="button" class="btn btn-outline-light fa fa-heart" style="font-size:18px; color:gray; display:none;" id="like_{{ post.id }}" onclick="like_post('{{post.id}}')"></button>
+                    {% else %}
+                        <button type="button" class="btn btn-outline-light fa fa-heart" style="font-size:18px; color:red; display:none;" id="unlike_{{ post.id }}" onclick="unlike_post('{{post.id}}')"></button>
+                        <button type="button" class="btn btn-outline-light fa fa-heart" style="font-size:18px; color:gray" id="like_{{ post.id }}" onclick="like_post('{{post.id}}')"></button>
+                    {% endif %}
+                {% else %}
+                    <button type="button" class="btn btn-outline-light fa fa-heart" style="font-size:18px; color:red;"></button>    
+                {% endif %}
+                <p style="color:black" id="howmanylikes_{{ post.id }}" class="count_likes" >{{ post.likes }}</p>
+                
+                <p class="card-text"><small class="text-muted"> {{post.date}}</small></p>
+            </div>
+        </div>
+        {% endfor %}
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+            {% if current_page.has_previous %}
+              <li class="page-item"><a class="page-link" href="?page={{current_page.previous_page_number}}">Previous</a></li>
+            {% endif %}
+            {% if current_page.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{current_page.next_page_number}}">Next</a></li>
+            {% endif %}
+            </ul>
+        </nav>
+    </div>
+  
+{% endblock %}
+
+
+
